@@ -1,0 +1,24 @@
+{
+  "name": "anny_bot",
+  "version": "1.0.0",
+  "description": "um bot para whatsapp",
+  "main": "index.js",
+  "scripts": {
+    "start": "node src/index.js"
+  },
+  "keywords": [
+    "bot",
+    "whatsapp"
+  ],
+  "author": "mneto",
+  "license": "ISC",
+  "dependencies": {
+    "@whiskeysockets/baileys": "^6.4.1",
+    "cfonts": "^3.2.0",
+    "cli-color": "^2.0.3",
+    "lodash": "^4.17.21",
+    "mime-types": "^2.1.35",
+    "node-fetch": "^3.3.2",
+    "qrcode-terminal": "^0.12.0"
+  }
+}
