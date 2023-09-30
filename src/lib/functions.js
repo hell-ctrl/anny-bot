@@ -1,15 +1,6 @@
-const { downloadContentFromMessage } = require("@whiskeysockets/baileys");
 const cfonts = require("cfonts");
 const _ = require("lodash");
 
-const getFileBuffer = async (mediakey, MediaType) => {
-  const stream = await downloadContentFromMessage(mediakey, MediaType);
-  let buffer = Buffer.from([]);
-  for await (let chunk of stream) {
-    buffer = Buffer.concat([buffer, chunk]);
-  }
-  return buffer;
-};
 
 const banner = cfonts.render("Anny", {
   font: "tiny",
@@ -27,4 +18,4 @@ const banner = cfonts.render("Anny", {
 });
 
 
-module.exports = { banner, getFileBuffer };
+module.exports = { banner };
