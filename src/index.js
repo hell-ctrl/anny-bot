@@ -1,9 +1,10 @@
 const connectToWhatsApp = require("./connection/connection.js");
 
 const makeSticker = require("./commands/stickers/makeSticker.js");
+const stkToMedia = require("./commands/stickers/stickerToMedia.js");
 
 const { sendText, sendImage, getMessageText } = require("./utils/message.js");
-const { isQuotedImage, isQuotedVideo, getMediaMessageContent } = require("./utils/media.js");
+const { isQuotedImage, isQuotedVideo, isQuotedSticker, getMediaMessageContent } = require("./utils/media.js");
 
 const clc = require("cli-color");
 
@@ -38,9 +39,23 @@ async function processCommand(sock, messageInfo, messageType) {
       case "stk":
         if (!isQuotedImage(messageType, messageInfo) && !isQuotedVideo(messageType, messageInfo)) {
           return sendText(sock, from, quoted,`Marque uma imagem ou envie na legenda da imagem o comando ${prefix}${command}`);
-        } else {
-          await makeSticker(getMediaMessageContent(messageInfo, messageType), sock, from, quoted);
         }
+        await makeSticker(getMediaMessageContent(messageInfo, messageType), sock, from, quoted);
+
+        break;
+      case "toimg":
+        if (!isQuotedSticker(messageType, messageInfo)) {
+          return sendText(sock, from, quoted, "marque uma figurinha")
+        } 
+        await stkToMedia(getMediaMessageContent(messageInfo, messageType), sock, from, quoted, messageType, messageInfo);
+
+        break;
+      case "togif":
+        if (!isQuotedSticker(messageType, messageInfo)) {
+          return sendText(sock, from, quoted, "marque uma figurinha")
+        } 
+        await stkToMedia(getMediaMessageContent(messageInfo, messageType), sock, from, quoted, messageType, messageInfo);
+
         break;
       default:
         break;

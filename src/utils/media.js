@@ -12,8 +12,10 @@ function isQuotedVideo(messageType, messageInfo) {
   return isExtendedTextMessage || hasCaption;
 }
 
-function isQuotedSticker(messageType) {
-  return messageType === "extendedTextMessage";
+function isQuotedSticker(messageType, messageInfo) {
+  const isExtendedTextMessage = messageType === "extendedTextMessage";
+  const isSticker = messageInfo.message?.extendedTextMessage?.contextInfo.quotedMessage.stickerMessage || false
+  return isExtendedTextMessage && isSticker;
 }
 
 function getMediaMessageContent(messageInfo, mediaType) {

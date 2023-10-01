@@ -6,6 +6,10 @@ function sendImage(sock, from, quoted, image) {
   sock.sendMessage(from, { image: image }, { quoted });
 }
 
+function sendVideo(sock, from, quoted, video) {
+  sock.sendMessage(from, { video: video, gifPlayback: true }, { quoted });
+}
+
 function getMessageText(messageInfo, messageType) {
   let textOfMessage = "";
 
@@ -22,4 +26,4 @@ function getMessageText(messageInfo, messageType) {
   return textOfMessage;
 }
 
-module.exports = { sendText, sendImage, getMessageText };
+module.exports = { sendText, sendImage, sendVideo, getMessageText };
