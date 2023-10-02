@@ -8,8 +8,7 @@ const { isQuotedImage, isQuotedVideo, isQuotedSticker, getMediaMessageContent } 
 
 const clc = require("cli-color");
 
-const config = require("./config.json");
-const prefix = config.prefix;
+const prefix = ".";
 
 async function processCommand(sock, messageInfo, messageType) {
   const from = messageInfo.key.remoteJid;
@@ -18,7 +17,7 @@ async function processCommand(sock, messageInfo, messageType) {
   const command = isCmd ? textOfMessage.slice(1).split(/ +/).shift().toLowerCase() : null;
   const isGroup = from.endsWith("@g.us");
   const sender = isGroup ? messageInfo.key.participant : from;
-  const pushname = messageInfo?.pushName || "";
+  const pushName = messageInfo?.pushName || "";
   const groupMetadata = isGroup ? await sock.groupMetadata(from) : "";
   const groupName = isGroup ? groupMetadata.subject : "";
   const quoted = messageInfo.quoted ? messageInfo.quoted : messageInfo;
@@ -28,7 +27,7 @@ async function processCommand(sock, messageInfo, messageType) {
   if (isCmd) {
     console.log(`${clc.redBright(`[+] Comando no ${isGroup ? "Grupo: " + groupName : "Privado"}`)}`);
     console.log(`${clc.redBright("[+] Comando: ")}${command}`);
-    console.log(`${clc.redBright("[+] Usuário: ")}${pushname}`);
+    console.log(`${clc.redBright("[+] Usuário: ")}${pushName}`);
     console.log(`${clc.redBright("[+] Data: ")}${new Date()} \n`);
   
     switch (command) {
@@ -40,19 +39,19 @@ async function processCommand(sock, messageInfo, messageType) {
         if (!isQuotedImage(messageType, messageInfo) && !isQuotedVideo(messageType, messageInfo)) {
           return sendText(sock, from, quoted,`Marque uma imagem ou envie na legenda da imagem o comando ${prefix}${command}`);
         }
-        await makeSticker(getMediaMessageContent(messageInfo, messageType), sock, from, quoted);
+        await makeSticker(getMediaMessageContent(messageInfo, messageType), sock, from, quoted, pushName);
 
         break;
       case "toimg":
         if (!isQuotedSticker(messageType, messageInfo)) {
-          return sendText(sock, from, quoted, "marque uma figurinha")
+          return sendText(sock, from, quoted, "marque uma figurinha");
         } 
         await stkToMedia(getMediaMessageContent(messageInfo, messageType), sock, from, quoted, messageType, messageInfo);
 
         break;
       case "togif":
         if (!isQuotedSticker(messageType, messageInfo)) {
-          return sendText(sock, from, quoted, "marque uma figurinha")
+          return sendText(sock, from, quoted, "marque uma figurinha");
         } 
         await stkToMedia(getMediaMessageContent(messageInfo, messageType), sock, from, quoted, messageType, messageInfo);
 

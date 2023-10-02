@@ -16,7 +16,7 @@ async function stkToMedia(sticker, sock, from, quoted, mediaType, messageInfo) {
   if (isAnimated) {
     exec(`python3 ./src/utils/getWebpFrames.py`, () => {
       exec(
-        `ffmpeg -framerate 21 -i ${tempFolderPath}frame_%04d.png -c:v libx264 -pix_fmt yuv420p ${tempFolderPath}media.mp4`,
+        `ffmpeg -framerate 15 -i ${tempFolderPath}frame_%04d.png -c:v libx264 -pix_fmt yuv420p ${tempFolderPath}media.mp4`,
         () => {
           const media = fs.readFileSync(`${tempFolderPath}media.mp4`);
 
