@@ -2,8 +2,8 @@ function sendText(sock, from, quoted, text) {
   sock.sendMessage(from, { text: text }, { quoted });
 }
 
-function sendImage(sock, from, quoted, image) {
-  sock.sendMessage(from, { image: image }, { quoted });
+function sendImage(sock, from, quoted, image, caption = "") {
+  sock.sendMessage(from, { image: image, caption }, { quoted });
 }
 
 function sendVideo(sock, from, quoted, video) {
@@ -11,7 +11,7 @@ function sendVideo(sock, from, quoted, video) {
 }
 
 function sendSticker(sock, from, quoted, sticker) {
-  sock.sendMessage(from, { sticker: sticker, gifPlayback: true}, { quoted });
+  sock.sendMessage(from, { sticker: sticker }, { quoted });
 }
 
 function getMessageText(messageInfo, messageType) {
@@ -30,4 +30,10 @@ function getMessageText(messageInfo, messageType) {
   return textOfMessage;
 }
 
-module.exports = { sendText, sendImage, sendVideo, sendSticker, getMessageText };
+module.exports = {
+  sendText,
+  sendImage,
+  sendVideo,
+  sendSticker,
+  getMessageText,
+};
