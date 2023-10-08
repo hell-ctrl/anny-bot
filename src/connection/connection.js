@@ -1,7 +1,7 @@
 const { default: makeWASocket, DisconnectReason, useMultiFileAuthState } = require("@whiskeysockets/baileys");
 const pino = require("pino");
 const clc = require("cli-color");
-const { banner } = require("../lib/functions.js");
+const { banner } = require("./banner.js");
 
 async function connectToWhatsApp() {
   const { state, saveCreds } = await useMultiFileAuthState(

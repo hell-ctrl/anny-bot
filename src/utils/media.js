@@ -59,7 +59,7 @@ function getMediaMessageContent(messageInfo, mediaType) {
   return messageInfo.message[mediaType];
 }
 
-const getFileBuffer = async (mediaKey, mediaType) => {
+const getFileBufferFromWhatsapp = async (mediaKey, mediaType) => {
   const stream = await downloadContentFromMessage(mediaKey, mediaType);
   const chunks = [];
 
@@ -85,6 +85,6 @@ module.exports = {
   isQuotedVideo,
   isQuotedSticker,
   getMediaMessageContent,
-  getFileBuffer,
+  getFileBufferFromWhatsapp,
   getBuffer
 };

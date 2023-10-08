@@ -19,7 +19,7 @@ async function getUserProfilePic(sock, sender) {
   }
 }
 
-async function getUserStatus(sock, sender) {
+async function getUserBio(sock, sender) {
   try {
     const statusData = await sock.fetchStatus(sender);
     return statusData.status;
@@ -30,7 +30,7 @@ async function getUserStatus(sock, sender) {
 
 async function profile(sock, from, sender, quoted, pushName, userDevice) {
   const userProfilePic = await getUserProfilePic(sock, sender);
-  const status = await getUserStatus(sock, sender);
+  const bio = await getUserBio(sock, sender);
 
   const randomPutaPercentage = getRandomPercentage();
   const randomGostosuraPercentage = getRandomPercentage();
@@ -42,7 +42,7 @@ async function profile(sock, from, sender, quoted, pushName, userDevice) {
 
 🗣️ Usuário: ${pushName}
 📱 Dispositivo: ${userDevice}
-💭 Bio: ${status}
+💭 Bio: ${bio}
 🏦 Instituição: Anny Bank
 
 ⭐「 % PORCENTAGEM % 」⭐

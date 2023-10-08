@@ -6,8 +6,8 @@ function sendImage(sock, from, quoted, image, caption = "") {
   sock.sendMessage(from, { image: image, caption }, { quoted });
 }
 
-function sendVideo(sock, from, quoted, video) {
-  sock.sendMessage(from, { video: video, gifPlayback: true }, { quoted });
+function sendVideo(sock, from, quoted, video, opitions) {
+  sock.sendMessage(from, { video: video, ...opitions}, { quoted });
 }
 
 function sendSticker(sock, from, quoted, sticker) {

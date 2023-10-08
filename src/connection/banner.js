@@ -5,7 +5,7 @@ const _ = require("lodash");
 const banner = cfonts.render("Anny", {
   font: "tiny",
   align: "center",
-  colors: _.shuffle(["red", "cyan", "yellow", "gray"]),
+  colors: _.shuffle(["red", "cyan", "yellow", "green"]),
   background: "transparent",
   letterSpacing: 2,
   lineHeight: 2,

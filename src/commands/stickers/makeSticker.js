@@ -1,6 +1,6 @@
 const fs = require("fs");
 const { exec } = require("child_process");
-const { getFileBuffer } = require("../../utils/media.js");
+const { getFileBufferFromWhatsapp} = require("../../utils/media.js");
 const { sendSticker, sendText } = require("../../utils/message.js");
 const addStickerMetaData = require("./addStickerMetaData.js");
 
@@ -20,7 +20,7 @@ async function makeSticker(mediaKey, sock, from, quoted, pushName) {
     }
   }
 
-  const buffer = await getFileBuffer(mediaKey, mediaType);
+  const buffer = await getFileBufferFromWhatsapp(mediaKey, mediaType);
 
   const randomId = `${Math.random().toString(36).substring(2, 10)}`;
 

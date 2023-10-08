@@ -1,10 +1,11 @@
-const { getFileBuffer, getMediaMessageContent } = require("../../utils/media");
+const { getFileBufferFromWhatsapp, getMediaMessageContent, getBuffer } = require("../../utils/media");
 const { sendImage, sendVideo } = require("../../utils/message");
-const { exec } = require("child_process");
+const webpToMp4 = require("../../utils/webpToMp4");
+
 const fs = require("fs");
 
 async function stkToMedia(sticker, sock, from, quoted, mediaType, messageInfo) {
-  const buffer = await getFileBuffer(sticker, "sticker");
+  const buffer = await getFileBufferFromWhatsapp(sticker, "sticker");
 
   const isAnimated = getMediaMessageContent(messageInfo, mediaType).isAnimated;
 
@@ -14,36 +15,17 @@ async function stkToMedia(sticker, sock, from, quoted, mediaType, messageInfo) {
   fs.writeFileSync(inputFile, buffer);
 
   if (isAnimated) {
-    exec(`python3 ./src/utils/getWebpFrames.py`, () => {
-      exec(
-        `ffmpeg -framerate 15 -i ${tempFolderPath}frame_%04d.png -c:v libx264 -pix_fmt yuv420p ${tempFolderPath}media.mp4`,
-        () => {
-          const media = fs.readFileSync(`${tempFolderPath}media.mp4`);
+    const { resultado } = await webpToMp4(inputFile); // mp4 url to download
 
-          sendVideo(sock, from, quoted, media);
+    const mp4Buffer = await getBuffer(resultado);
 
-          fs.readdir(tempFolderPath, (err, files) => {
-            files.forEach((file) => {
-              const filePath = `${tempFolderPath}${file}`;
+    sendVideo(sock, from, quoted, mp4Buffer, { gifPlayback: true })
 
-              if (file.startsWith("frame")) {
-                fs.unlinkSync(filePath);
-              }
-              if (file == "media.mp4") {
-                fs.unlinkSync(filePath);
-              }
-              if (file == "media.webp") {
-                fs.unlinkSync(filePath);
-              }
-            });
-          });
-        }
-      );
-    });
   } else {
     sendImage(sock, from, quoted, buffer);
-    fs.unlinkSync(`${tempFolderPath}media.webp`)
   }
+
+  fs.unlinkSync(`${tempFolderPath}media.webp`)
 }
 
 module.exports = stkToMedia;
