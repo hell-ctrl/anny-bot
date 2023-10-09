@@ -1,6 +1,8 @@
 <img align="center" src="https://user-images.githubusercontent.com/74038190/225813708-98b745f2-7d22-48cf-9150-083f1b00d6c9.gif"></img>
 <h1 align="center">Anny Bot</h1>
 
+<p>Anny Bot is the result of hard work and passion, made by me, with the collaboration of dedicated friends. It was developed with a simple and powerful goal in mind: to make people's lives on WhatsApp easier and more fun!</p>
+
 <p align="center">
   <a href="https://github.com/hell-ctrl">
     <img src="https://img.shields.io/badge/hell-ctrl-cyan.svg?style=for-the-badge&logo=github" alt="Author">
