@@ -39,7 +39,7 @@
   </thead>
   <tbody>
     <tr>
-      <td>Menu</td>
+      <td translate="no">Menu</td>
       <td>Opens a menu with a list of all bot commands.</td>
     </tr>
     <tr>
