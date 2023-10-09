@@ -61,3 +61,31 @@
     </tr>
   </tbody>
 </table>
+
+
+<h2>Installation</h2>
+
+<p>Before you begin the installation, make sure you have the following prerequisites:</p>
+
+<ul>
+  <li>git</li>
+  <li>nodejs</li>
+  <li>npm</li>
+  <li>ffmpeg</li>
+</ul>
+
+<p>Follow these installation commands:</p>
+
+<pre>
+  <code class="language-bash">
+    > git clone https://github.com/hell-ctrl/anny-bot
+    > cd anny-bot
+    > npm i
+    > npm start
+  </code>
+</pre>
+
+<p>If everything goes well, a QR code will appear in the terminal. Open WhatsApp on the device where you want to install the bot, go to "Connected devices," and select "Add a new device." Then, scan the QR code to complete the setup.</p>
+
+<p><strong>Note:</strong> If the commands don't work initially, try restarting the bot.</p>
+
