@@ -78,10 +78,10 @@
 
 <pre>
   <code class="language-bash">
-    > git clone https://github.com/hell-ctrl/anny-bot
-    > cd anny-bot
-    > npm i
-    > npm start
+> git clone https://github.com/hell-ctrl/anny-bot
+> cd anny-bot
+> npm i
+> npm start
   </code>
 </pre>
 
