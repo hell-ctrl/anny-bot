@@ -3,14 +3,14 @@
 
 <p align="center">
   <a href="https://github.com/hell-ctrl">
-    <img src="https://img.shields.io/badge/hell-ctrl-yellow.svg?style=for-the-badge&logo=github" alt="Author">
+    <img src="https://img.shields.io/badge/hell-ctrl-cyan.svg?style=for-the-badge&logo=github" alt="Author">
   </a>
     <a href="https://wa.me/559887583208">
     <img src="https://img.shields.io/badge/WhatsApp-25D366?style=for-the-badge&logo=whatsapp&logoColor=white" alt="WhatsApp">
   </a>
 </p>
 
-<h2>Technologies Used</h2>
+<h2>Technologies Used 🤔</h2>
 
 <p align="center">
   <a href="https://developer.mozilla.org/">
@@ -21,7 +21,8 @@
   </a>
 </p>
 
-<h2>Bot Commands</h2>
+
+<h2>Bot Commands ✅</h2>
 
 <p><strong>Note:</strong> To use the commands, you need to prefix them with the prefix ("/", ".", "!").</p>
 
@@ -63,29 +64,42 @@
 </table>
 
 
-<h2>Installation</h2>
+<h2>Installation ⚙️</h2>
 
 <p>Before you begin the installation, make sure you have the following prerequisites:</p>
 
 <ul>
-  <li>git</li>
-  <li>nodejs</li>
-  <li>npm</li>
-  <li>ffmpeg</li>
+  <li>Git</li>
+  <li>Nodejs</li>
+  <li>Npm</li>
+  <li>FFmpeg</li>
 </ul>
 
 <p>Follow these installation commands:</p>
 
-<pre>
-  <code class="language-bash">
-> git clone https://github.com/hell-ctrl/anny-bot
+``` bash
+> git clone https://github.com/hell-ctrl/anny-bot/
 > cd anny-bot
 > npm i
-> npm start
-  </code>
-</pre>
+> npm install
+```
+
 
 <p>If everything goes well, a QR code will appear in the terminal. Open WhatsApp on the device where you want to install the bot, go to "Connected devices," and select "Add a new device." Then, scan the QR code to complete the setup.</p>
 
 <p><strong>Note:</strong> If the commands don't work initially, try restarting the bot.</p>
+
+<h2>Tested On 💻</h2>
+
+<ul>
+  <li>Termux</li>
+  <li>Linux</li>
+  <li>Windows/wsl</li>
+</ul>
+
+## License ☕
+
+This project is licensed by [Apache License 2.0](https://www.apache.org/licenses/LICENSE-2.0) - see the [LICENSE](LICENSE) file for more details.
+
+
 
