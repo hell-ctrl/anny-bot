@@ -43,6 +43,14 @@
       <td>Opens a menu with a list of all bot commands.</td>
     </tr>
     <tr>
+      <td>Criador</td>
+      <td>Bot creator contact.</td>
+    </tr>
+    <tr>
+      <td>Sugestao</td>
+      <td>Send a suggestion to bot creator.</td>
+    </tr>
+    <tr>
       <td>Infobot</td>
       <td>Information about the bot.</td>
     </tr>
