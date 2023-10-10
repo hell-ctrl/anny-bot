@@ -14,7 +14,9 @@
   "license": "ISC",
   "dependencies": {
     "@whiskeysockets/baileys": "^6.4.1",
+    "axios": "^1.5.1",
     "cfonts": "^3.2.0",
+    "cheerio": "^1.0.0-rc.12",
     "cli-color": "^2.0.3",
     "lodash": "^4.17.21",
     "node-fetch": "^2.7.0",

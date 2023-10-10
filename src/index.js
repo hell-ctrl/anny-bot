@@ -1,4 +1,4 @@
-const connectToWhatsApp = require("./connection/connection.js");""
+const connectToWhatsApp = require("./connection/connection.js");
 const processCommand = require("./commands/index.js");
 
 async function startAnny() {

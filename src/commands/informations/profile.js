@@ -28,7 +28,8 @@ async function getUserBio(sock, sender) {
   }
 }
 
-async function profile(sock, from, sender, quoted, pushName, userDevice) {
+
+async function profile(sock, from, sender, quoted, pushName, userDevice, senderIsAdm, isGroup) {
   const userProfilePic = await getUserProfilePic(sock, sender);
   const bio = await getUserBio(sock, sender);
 
@@ -44,7 +45,7 @@ async function profile(sock, from, sender, quoted, pushName, userDevice) {
 📱 Dispositivo: ${userDevice}
 💭 Bio: ${bio}
 🏦 Instituição: Anny Bank
-
+${isGroup? `⚙️ Administrador? ${senderIsAdm ? "Sim ✅" : "Não ❌"}\n` : ""}
 ⭐「 % PORCENTAGEM % 」⭐
 
 😈 Nível de Puta: ${randomPutaPercentage}%

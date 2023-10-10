@@ -1,17 +1,17 @@
-function sendText(sock, from, quoted, text) {
-  sock.sendMessage(from, { text: text }, { quoted });
+function sendText(sock, to, quoted, text) {
+  sock.sendMessage(to, { text: text }, { quoted });
 }
 
-function sendImage(sock, from, quoted, image, caption = "") {
-  sock.sendMessage(from, { image: image, caption }, { quoted });
+function sendImage(sock, to, quoted, image, caption = "") {
+  sock.sendMessage(to, { image: image, caption }, { quoted });
 }
 
-function sendVideo(sock, from, quoted, video, opitions) {
-  sock.sendMessage(from, { video: video, ...opitions}, { quoted });
+function sendVideo(sock, to, quoted, video, opitions) {
+  sock.sendMessage(to, { video: video, ...opitions}, { quoted });
 }
 
-function sendSticker(sock, from, quoted, sticker) {
-  sock.sendMessage(from, { sticker: sticker }, { quoted });
+function sendSticker(sock, to, quoted, sticker) {
+  sock.sendMessage(to, { sticker: sticker }, { quoted });
 }
 
 function getMessageText(messageInfo, messageType) {
