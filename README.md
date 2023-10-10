@@ -1,9 +1,3 @@
-<<<<<<< HEAD
-# anny-bot
-## instalação
-- nodejs e dependências
-- ffmpeg
-=======
 <img align="center" src="https://user-images.githubusercontent.com/74038190/225813708-98b745f2-7d22-48cf-9150-083f1b00d6c9.gif"></img>
 <h1 align="center">Anny Bot</h1>
 
@@ -119,4 +113,3 @@ This project is licensed by [Apache License 2.0](https://www.apache.org/licenses
 
 
 
->>>>>>> 2dc841c876f40f2c60c8dcbcd30f35fbdd70fc5f
