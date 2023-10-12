@@ -70,6 +70,14 @@
       <td>Togif</td>
       <td>Converts an animated sticker to a gif.</td>
     </tr>
+    <tr>
+      <td>Play_audio</td>
+      <td>Download audio from YouTube.</td>
+    </tr>
+    <tr>
+      <td>Play_video</td>
+      <td>Download video from YouTube.</td>
+    </tr>
   </tbody>
 </table>
 
@@ -109,7 +117,7 @@
 
 <h2>License ☕</h2>
 
-<p>This project is licensed by [Apache License 2.0](https://www.apache.org/licenses/LICENSE-2.0) - see the [LICENSE](LICENSE) file for more details.></p>
+This project is licensed by [Apache License 2.0](https://www.apache.org/licenses/LICENSE-2.0) - see the [LICENSE](LICENSE) file for more details.
 
 
 
