@@ -70,6 +70,14 @@
       <td>Togif</td>
       <td>Converts an animated sticker to a gif.</td>
     </tr>
+    <tr>
+      <td>Play_audio</td>
+      <td>Download audio from YouTube.</td>
+    </tr>
+    <tr>
+      <td>Play_video</td>
+      <td>Download video from YouTube.</td>
+    </tr>
   </tbody>
 </table>
 
