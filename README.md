@@ -78,6 +78,10 @@
       <td>Play_video</td>
       <td>Download video from YouTube.</td>
     </tr>
+    <tr>
+      <td>Ig_down</td>
+      <td>Download video, story or image from instagram.</td>
+    </tr>
   </tbody>
 </table>
 
