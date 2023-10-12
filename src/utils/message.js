@@ -1,17 +1,21 @@
-function sendText(sock, to, quoted, text) {
-  sock.sendMessage(to, { text: text }, { quoted });
+async function sendText(sock, to, quoted, text) {
+  await sock.sendMessage(to, { text: text }, { quoted });
 }
 
-function sendImage(sock, to, quoted, image, caption = "") {
-  sock.sendMessage(to, { image: image, caption }, { quoted });
+async function sendImage(sock, to, quoted, image, caption = "") {
+  await sock.sendMessage(to, { image: image, caption }, { quoted });
 }
 
-function sendVideo(sock, to, quoted, video, opitions) {
-  sock.sendMessage(to, { video: video, ...opitions}, { quoted });
+async function sendVideo(sock, to, quoted, video, opitions) {
+  await sock.sendMessage(to, { video: video, ...opitions}, { quoted });
 }
 
-function sendSticker(sock, to, quoted, sticker) {
-  sock.sendMessage(to, { sticker: sticker }, { quoted });
+async function sendSticker(sock, to, quoted, sticker) {
+  await sock.sendMessage(to, { sticker: sticker }, { quoted });
+}
+
+async function sendAudio(sock, to, quoted, audioUrl) {
+  await sock.sendMessage(to, { audio: { url: audioUrl }, mimetype: "audio/mp4"}, { quoted })
 }
 
 function getMessageText(messageInfo, messageType) {
@@ -35,5 +39,6 @@ module.exports = {
   sendImage,
   sendVideo,
   sendSticker,
+  sendAudio,
   getMessageText,
 };

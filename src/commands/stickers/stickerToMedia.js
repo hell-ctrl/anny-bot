@@ -18,10 +18,10 @@ async function stkToMedia(sticker, sock, from, quoted, mediaType, messageInfo) {
 
     const mp4Buffer = await getBuffer(resultado);
 
-    sendVideo(sock, from, quoted, mp4Buffer, { gifPlayback: true })
+    await sendVideo(sock, from, quoted, mp4Buffer, { gifPlayback: true })
 
   } else {
-    sendImage(sock, from, quoted, buffer);
+    await sendImage(sock, from, quoted, buffer);
   }
 
   fs.unlinkSync(`${tempFolderPath}media.webp`)

@@ -41,20 +41,20 @@ async function profile(sock, from, sender, quoted, pushName, userDevice, senderI
   const text = `
 👤「 INFORMAÇÕES PERFIL 」👤
 
-🗣️ Usuário: ${pushName}
-📱 Dispositivo: ${userDevice}
-💭 Bio: ${bio}
-🏦 Instituição: Anny Bank
-${isGroup? `⚙️ Administrador? ${senderIsAdm ? "Sim ✅" : "Não ❌"}\n` : ""}
+🗣️ Usuário: *${pushName}*
+📱 Dispositivo: *${userDevice}*
+💭 Bio: *${bio}*
+🏦 Instituição: *Anny Bank*
+${isGroup? `⚙️ Administrador? ${senderIsAdm ? "*Sim ✅*" : "*Não ❌*"}\n` : ""}
 ⭐「 % PORCENTAGEM % 」⭐
 
-😈 Nível de Puta: ${randomPutaPercentage}%
-🌜 Nível de Gostosura: ${randomGostosuraPercentage}%
-💋 Nível de Gado: ${randomGadoPercentage}%
-👅 Valor do Programa: R$${randomProgramValue}
+😈 Nível de Puta: *${randomPutaPercentage}%*
+🌜 Nível de Gostosura: *${randomGostosuraPercentage}%*
+💋 Nível de Gado: *${randomGadoPercentage}%*
+👅 Valor do Programa: *R$${randomProgramValue}*
 `;
 
-  sendImage(sock, from, quoted, userProfilePic, text);
+  await sendImage(sock, from, quoted, userProfilePic, text);
 }
 
 module.exports = profile;

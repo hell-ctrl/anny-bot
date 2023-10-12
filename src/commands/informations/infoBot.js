@@ -1,24 +1,23 @@
+const { botName, botOwner} = require("../../configs/info.json");
 const fs = require("fs");
 const { sendVideo } = require("../../utils/message");
 
-function infoBot(sock, messageFrom, quoted, prefixs, pushName, botStartTime, isGroup, botIsAdm) {
+async function infoBot(sock, messageFrom, quoted, prefixs, botStartTime, isGroup, botIsAdm) {
     const logo = fs.readFileSync("./assets/logo.mp4");
-    const elapsedTimeInSeconds = Math.floor((new Date() - botStartTime) / 1000); // Calcula elapsedTime dentro da função
-    const elapsedTimeFormatted = timeOn(elapsedTimeInSeconds); // Formata o tempo
+    const elapsedTimeInSeconds = Math.floor((new Date() - botStartTime) / 1000);
+    const elapsedTimeFormatted = timeOn(elapsedTimeInSeconds); 
 
     const text = `
-╭══════════════ ⪩
-│き⃟ℹ️ 𝐈𝐍𝐅𝐎-𝐁𝐎𝐓 ❈⃟ℹ️
-│✾ ⋟ Bot: Anny Bot
-${isGroup ? `│✾ ⋟ Administrador? ${botIsAdm ? "Sim" : "Não"}` : "│✾ ⋟ Pv? 🤔"}
-│✾ ⋟ Prefixos:「 ${prefixs.join("   ")} 」
-│✾ ⋟ Criador: wa.me/559887583208
-│✾ ⋟ Usuário: ${pushName}
-│✾ ⋟ Tempo online: ${elapsedTimeFormatted}
-│✾ ⋟ Github: http://bit.ly/45n6Own
-╰═════════════ ⪨
+╭══════════════ ⍨
+│ ❗ INFORMAÇÕES ❗
+│ ➤ Bot: ${botName} ${isGroup ? `\n│ ➤ Administrador? ${botIsAdm ? "Sim" : "Não"}` : ""}
+│ ➤ Prefixos:「 ${prefixs.join("   ")} 」
+│ ➤ Criador: wa.me/${botOwner}
+│ ➤ Tempo online: ${elapsedTimeFormatted}
+│ ➤ Github: http://bit.ly/45n6Own
+╰══════════════ ⍨
 `;
-    sendVideo(sock, messageFrom, quoted, logo, { caption: text, gifPlayback: true });
+    await sendVideo(sock, messageFrom, quoted, logo, { caption: text, gifPlayback: true });
 }
 
 function timeOn(elapsedTimeInSeconds) {

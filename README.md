@@ -107,9 +107,9 @@
   <li>Windows/wsl</li>
 </ul>
 
-## License ☕
+<h2>License ☕</h2>
 
-This project is licensed by [Apache License 2.0](https://www.apache.org/licenses/LICENSE-2.0) - see the [LICENSE](LICENSE) file for more details.
+<p>This project is licensed by [Apache License 2.0](https://www.apache.org/licenses/LICENSE-2.0) - see the [LICENSE](LICENSE) file for more details.></p>
 
 
 

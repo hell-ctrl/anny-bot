@@ -3,6 +3,7 @@ const { exec } = require("child_process");
 const { getFileBufferFromWhatsapp} = require("../../utils/media.js");
 const { sendSticker, sendText } = require("../../utils/message.js");
 const addStickerMetaData = require("./addStickerMetaData.js");
+const { commands } = require("../../configs/info.json")
 
 async function makeSticker(mediaKey, sock, from, quoted, pushName) {
   let mediaType = "image";
@@ -15,7 +16,7 @@ async function makeSticker(mediaKey, sock, from, quoted, pushName) {
         sock,
         from,
         quoted,
-        "apenas faço figurinhas com 10 segundos ou menos!"
+        commands.stickers.limit_seconds
       );
     }
   }
@@ -45,7 +46,7 @@ async function makeSticker(mediaKey, sock, from, quoted, pushName) {
 
       const media = fs.readFileSync(mediaWithMetaDataPath);
 
-      sendSticker(sock, from, quoted, media);
+      await sendSticker(sock, from, quoted, media);
 
       fs.unlinkSync(inputFile);
       fs.unlinkSync(outputFile);
