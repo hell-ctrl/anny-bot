@@ -3,23 +3,13 @@ const { exec } = require("child_process");
 const { getFileBufferFromWhatsapp} = require("../../utils/media.js");
 const { sendSticker, sendText } = require("../../utils/message.js");
 const addStickerMetaData = require("./addStickerMetaData.js");
-const { commands } = require("../../configs/info.json")
 
 async function makeSticker(mediaKey, sock, from, quoted, pushName) {
-  let mediaType = "image";
+  let mediaType = "seconds" in mediaKey ? "video": "image";
 
-  if (mediaKey.seconds) {
-    if (mediaKey.seconds <= 10) {
-      mediaType = "video";
-    } else {
-      return sendText(
-        sock,
-        from,
-        quoted,
-        commands.stickers.limit_seconds
-      );
-    }
-  }
+  if (mediaType == "video" && mediaKey.seconds > 10) {
+    return sendText(sock, from, quoted, "Opa, o vídeo deve ser de 10s ou menos.");
+  };
 
   const buffer = await getFileBufferFromWhatsapp(mediaKey, mediaType);
 
@@ -39,11 +29,7 @@ async function makeSticker(mediaKey, sock, from, quoted, pushName) {
   exec(
     `ffmpeg -i ${inputFile} -c:v libwebp -filter:v fps=fps=15 -loop 0 -an -lossless 1 -preset default -s 200:200 ${outputFile}`,
     async () => {
-      const mediaWithMetaDataPath = await addStickerMetaData(
-        outputFile,
-        stickerMetaData
-      );
-
+      const mediaWithMetaDataPath = await addStickerMetaData(outputFile, stickerMetaData);
       const media = fs.readFileSync(mediaWithMetaDataPath);
 
       await sendSticker(sock, from, quoted, media);

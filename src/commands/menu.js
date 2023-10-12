@@ -39,6 +39,8 @@ function menu(pushName, isGroup, groupName, prefix) {
 │ ➥ baixa um vídeo do youtube.
 │ ➤ ${prefix}play_audio (nome)
 │ ➥ baixa um áudio do youtube.
+│ ➤ ${prefix}ig_down (url)
+│ ➥ baixa vídeo do instagram.
 │
 ╰══════════════ ⍨
 `

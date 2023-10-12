@@ -9,7 +9,8 @@ const profile = require("./informations/profile.js");
 const infoBot = require("./informations/infoBot.js");
 const sendSugestionToBotOwner = require("./informations/sugestions.js");
 
-const ytDownload = require("./downloads/ytdownload.js");
+const ytDownload = require("./downloads/ytDownload.js");
+const igDownload = require("./downloads/igDownload.js");
 
 const { sendText, getMessageText, sendVideo } = require("../utils/message.js");
 const { isQuotedImage, isQuotedVideo, isQuotedSticker, getMediaMessageContent } = require("../utils/media.js");
@@ -90,60 +91,76 @@ async function processCommand(sock, messageInfo, messageType) {
       case "stk":
         if (!isQuotedImage(messageType, messageInfo) && !isQuotedVideo(messageType, messageInfo)) {
           return await sendText(sock, messageFrom, quoted,
-            `${info.commands.stickers.image_no_quoted} ${prefix}${command}`
+            `Marque uma imagem ou envie na legenda da imagem o comando ${prefix}${command}`
           );
         }
 
         try {
           await makeSticker(mediaMessage, sock, messageFrom, quoted, pushName);
         } catch {
-          await sendText(sock, messageFrom, quoted, info.commands.error);
+          await sendText(sock, messageFrom, quoted, "Não foi possível concluir o comando, pois ocorreu um erro interno.");
         }
         break;
 
       case "toimg":
         if (!isQuotedSticker(messageType, messageInfo)) {
-          return await sendText(sock, messageFrom, quoted, info.commands.stickers.sticker_no_quoted);
+          return await sendText(sock, messageFrom, quoted, "Você precisa marcar uma figurinha.");
         }
 
         try {
           await stkToMedia(mediaMessage, sock, messageFrom, personalizedQuote.status_selo, messageType, messageInfo);
         } catch {
-          await sendText(sock, messageFrom, quoted, info.commands.error);
+          await sendText(sock, messageFrom, quoted, "Não foi possível concluir o comando, pois ocorreu um erro interno.");
         }
         break;
 
       case "togif":
         if (!isQuotedSticker(messageType, messageInfo)) {
-          return await sendText(sock, messageFrom, quoted, info.commands.stickers.sticker_no_quoted);
+          return await sendText(sock, messageFrom, quoted, "Você precisa marcar uma figurinha.");
         }
 
         try {
           await stkToMedia(mediaMessage, sock, messageFrom, personalizedQuote.status_selo, messageType, messageInfo);
         } catch {
-          await sendText(sock, messageFrom, quoted, info.commands.error);
+          await sendText(sock, messageFrom, quoted, "Não foi possível concluir o comando, pois ocorreu um erro interno.");
         }
         break;
 
       case "play_video":
-        if (args.length == 0) return await sendText(sock, messageFrom, quoted, info.commands.play_no_query);
+        if (args.length == 0) {
+          return await sendText(sock, messageFrom, quoted, "Eu não irei adivinhar o nome do vídeo que você quer baixar.");
+        };
 
         try {
           await ytDownload(sock, messageFrom, personalizedQuote.video_selo, args.join(" "), command);
         } catch {
-          await sendText(sock, messageFrom, quoted, info.commands.error);
+          await sendText(sock, messageFrom, quoted, "Não foi possível concluir o comando, pois ocorreu um erro interno.");
         }
         break;
 
       case "play_audio":
-        if (args.length == 0) return await sendText(sock, messageFrom, quoted, info.commands.play_no_query);
+        if (args.length == 0) {
+          return await sendText(sock, messageFrom, quoted, "Eu não irei adivinhar o nome do áudio que você quer baixar.");
+        };
 
         try {
           await ytDownload(sock, messageFrom, personalizedQuote.audio_selo, args.join(" "), command);
         } catch {
-          await sendText(sock, messageFrom, quoted, info.commands.error);
+          await sendText(sock, messageFrom, quoted, "Não foi possível concluir o comando, pois ocorreu um erro interno.");
         }
         break;
+      
+      case "ig_down":
+        if (args.length == 0) {
+          return await sendText(sock, messageFrom, quoted, "Eu não irei adivinhar o link que você quer baixar.");
+        }
+
+        try {
+          await igDownload(sock, messageFrom, quoted, args.join(""));
+        } catch {
+          return await sendText(sock, messageFrom, quoted, "Eu não irei adivinhar o link que você quer baixar.");
+        }
+        break
       
       default:
         await sendText(sock, messageFrom, quoted, `Olá ${pushName} o comando ${command} não existe ❌`);

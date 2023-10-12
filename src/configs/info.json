@@ -1,15 +1,5 @@
 {
-    "botNumber": "5598875512460",
-    "botName": "Anny Bot",
-    "botOwner": "559887583208",
-    "commands": {
-        "error": "Não foi possível concluir o comando, pois ocorreu um erro interno.",
-        "stickers": {
-            "image_no_quoted": "❗ Marque uma imagem ou envie na legenda da imagem o comando",
-            "sticker_no_quoted": "Você precisa marcar uma figurinha.",
-            "limit_seconds": "Apenas faço figurinhas com vídeos de 10s ou menos."
-        },
-        "play_no_query": "Eu não irei adivinhar o nome do que você quer baixar."
-    }
-
+  "botNumber": "5598875512460",
+  "botName": "Anny Bot",
+  "botOwner": "559887583208"
 }
