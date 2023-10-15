@@ -2,7 +2,7 @@ const menu = require("./menu.js");
 const ownerContact = require("../configs/ownerContact.js");
 const info = require("../configs/info.json");
 
-const makeSticker = require("./stickers/makeSticker.js");
+const makeSticker = require("./stickers/createSticker.js");
 const stkToMedia = require("./stickers/stickerToMedia.js");
 
 const profile = require("./informations/profile.js");
@@ -11,6 +11,7 @@ const sendSugestionToBotOwner = require("./informations/sugestions.js");
 
 const ytDownload = require("./downloads/ytDownload.js");
 const igDownload = require("./downloads/igDownload.js");
+const tkkDownload = require("./downloads/tkkDownload.js");
 
 const { sendText, getMessageText, sendVideo } = require("../utils/message.js");
 const { isQuotedImage, isQuotedVideo, isQuotedSticker, getMediaMessageContent } = require("../utils/media.js");
@@ -31,15 +32,17 @@ async function processCommand(sock, messageInfo, messageType) {
   const textOfMessage = getMessageText(messageInfo, messageType);
   const isCmd = prefixs.includes(textOfMessage[0]) && textOfMessage.length > 1 ? prefix = textOfMessage[0] : false;
   const command = isCmd? textOfMessage.slice(1).split(/ +/).shift().toLowerCase() : null;
-  const isGroup = messageFrom.endsWith("@g.us");
-  const sender = isGroup ? messageInfo.key.participant : messageFrom;
   const pushName = messageInfo?.pushName || "";
+
+  const isGroup = messageFrom.endsWith("@g.us");
   const groupMetadata = isGroup ? await sock.groupMetadata(messageFrom) : "";
   const groupMembers = isGroup ? groupMetadata.participants : [];
   const groupAdmins = isGroup ? _.map(_.filter(groupMembers, "admin"), "id")  : [];
   const groupName = isGroup ? groupMetadata.subject : "";
+  const sender = isGroup ? messageInfo.key.participant : messageFrom;
   const senderIsAdm = isGroup && groupAdmins.includes(sender);
   const botIsAdm = isGroup && groupAdmins.includes(`${info.botNumber}@s.whatsapp.net`);
+
   const quoted = messageInfo.quoted ? messageInfo.quoted : messageInfo;
   const userDevice = messageInfo.key.id.length > 21 ? 'Android' : messageInfo.key.id.substring(0, 2) == '3A' ? 'IOS' : 'WhatsApp web';
   const args = textOfMessage.trim().split(/ +/).splice(1);
@@ -48,7 +51,7 @@ async function processCommand(sock, messageInfo, messageType) {
 
   const mediaMessage = getMediaMessageContent(messageInfo, messageType);
 
-  sock.sendPresenceUpdate("recording", messageFrom);
+  //sock.sendPresenceUpdate("recording", messageFrom);
 
   if (isCmd) {
     console.log(`${clc.redBright(`[+] Comando no ${isGroup ? "Grupo " + groupName : "Privado"}`)}`);
@@ -61,18 +64,18 @@ async function processCommand(sock, messageInfo, messageType) {
       case "menu":
         const logo = fs.readFileSync("./assets/logo.mp4");
         const menuText = menu(pushName, isGroup, groupName, prefix);
-        await sendVideo(sock, messageFrom, personalizedQuote.status_selo, logo, {caption: menuText, gifPlayback: true});
+        await sendVideo(sock, messageFrom, quoted, logo, {caption: menuText, gifPlayback: true});
         break;
 
       case "criador":
         await sock.sendMessage(messageFrom, 
           { contacts: { displayName: 'meu dono', contacts: [{ ownerContact }] } }
         )
-        await sendText(sock, messageFrom, personalizedQuote.contato_selo, `Olá ${pushName} este é número do meu criador`);
+        await sendText(sock, messageFrom, quoted, `Olá ${pushName} este é número do meu criador`);
         break
 
       case "infobot":
-        await infoBot(sock, messageFrom, personalizedQuote.status_selo, prefixs, botStartTime, isGroup, botIsAdm);
+        await infoBot(sock, messageFrom, quoted, prefixs, botStartTime, isGroup, botIsAdm);
         break;
 
       case "sugestao":
@@ -85,85 +88,60 @@ async function processCommand(sock, messageInfo, messageType) {
         await profile(sock, messageFrom, sender, quoted, pushName, userDevice, senderIsAdm, isGroup);
         break;
 
-      case "s":
-      case "sticker":
       case "fig":
-      case "stk":
         if (!isQuotedImage(messageType, messageInfo) && !isQuotedVideo(messageType, messageInfo)) {
           return await sendText(sock, messageFrom, quoted,
             `Marque uma imagem ou envie na legenda da imagem o comando ${prefix}${command}`
           );
-        }
-
-        try {
-          await makeSticker(mediaMessage, sock, messageFrom, quoted, pushName);
-        } catch {
-          await sendText(sock, messageFrom, quoted, "Não foi possível concluir o comando, pois ocorreu um erro interno.");
-        }
+        };  
+        await makeSticker(mediaMessage, sock, messageFrom, quoted, pushName);
         break;
 
       case "toimg":
         if (!isQuotedSticker(messageType, messageInfo)) {
           return await sendText(sock, messageFrom, quoted, "Você precisa marcar uma figurinha.");
-        }
-
-        try {
-          await stkToMedia(mediaMessage, sock, messageFrom, personalizedQuote.status_selo, messageType, messageInfo);
-        } catch {
-          await sendText(sock, messageFrom, quoted, "Não foi possível concluir o comando, pois ocorreu um erro interno.");
-        }
+        };
+        await stkToMedia(mediaMessage, sock, messageFrom, quoted, messageType, messageInfo);
         break;
 
       case "togif":
         if (!isQuotedSticker(messageType, messageInfo)) {
           return await sendText(sock, messageFrom, quoted, "Você precisa marcar uma figurinha.");
-        }
-
-        try {
-          await stkToMedia(mediaMessage, sock, messageFrom, personalizedQuote.status_selo, messageType, messageInfo);
-        } catch {
-          await sendText(sock, messageFrom, quoted, "Não foi possível concluir o comando, pois ocorreu um erro interno.");
-        }
+        };
+        await stkToMedia(mediaMessage, sock, messageFrom, quoted, messageType, messageInfo);
         break;
 
       case "play_video":
         if (args.length == 0) {
           return await sendText(sock, messageFrom, quoted, "Eu não irei adivinhar o nome do vídeo que você quer baixar.");
         };
-
-        try {
-          await ytDownload(sock, messageFrom, personalizedQuote.video_selo, args.join(" "), command);
-        } catch {
-          await sendText(sock, messageFrom, quoted, "Não foi possível concluir o comando, pois ocorreu um erro interno.");
-        }
+        await ytDownload(sock, messageFrom, quoted, args.join(" "), messageInfo, command);
         break;
 
       case "play_audio":
         if (args.length == 0) {
           return await sendText(sock, messageFrom, quoted, "Eu não irei adivinhar o nome do áudio que você quer baixar.");
         };
-
-        try {
-          await ytDownload(sock, messageFrom, personalizedQuote.audio_selo, args.join(" "), command);
-        } catch {
-          await sendText(sock, messageFrom, quoted, "Não foi possível concluir o comando, pois ocorreu um erro interno.");
-        }
+        await ytDownload(sock, messageFrom, quoted, args.join(" "), messageInfo, command);
         break;
       
       case "ig_down":
         if (args.length == 0) {
           return await sendText(sock, messageFrom, quoted, "Eu não irei adivinhar o link que você quer baixar.");
-        }
+        };
+        await igDownload(sock, messageFrom, quoted, messageInfo, args.join(""));
+        break;
 
-        try {
-          await igDownload(sock, messageFrom, quoted, args.join(""));
-        } catch {
-          return await sendText(sock, messageFrom, quoted, "Eu não irei adivinhar o link que você quer baixar.");
-        }
-        break
+      case "tkk_down":
+        if (args.length == 0) {
+          return await sendText(sock, messageFrom, quoted, "Eu não irei adivinhar o vídeo que você quer baixar.");
+        };
+
+        await tkkDownload(sock, messageFrom, quoted, messageInfo, args.join(""));
+        break;
       
       default:
-        await sendText(sock, messageFrom, quoted, `Olá ${pushName} o comando ${command} não existe ❌`);
+        await sendText(sock, messageFrom, quoted, `Olá ${pushName} o comando ${command} não existe!`);
         break;
     }
   }

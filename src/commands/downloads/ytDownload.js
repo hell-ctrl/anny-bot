@@ -1,48 +1,58 @@
-const { sendImage, sendVideo, sendAudio } = require("../../utils/message");
+const { sendImage, sendVideo, sendAudio, sendText, sendReaction } = require("../../utils/message");
 const ytDl = require("ytdl-core");
 const ytSearch = require("yt-search");
 const fs = require("fs");
-const { exec } = require("child_process");
+const { promisify } = require("util");
+const execAsync = promisify(require("child_process").exec);
 const { getBuffer } = require("../../utils/media");
 
-async function ytDownload(sock, messageFrom, quoted, query, command) {
-  const videoResult = await ytSearch(query);
-  const videoUrl = videoResult.videos[0].url;
+async function ytDownload(sock, messageFrom, quoted, query, messageInfo, command) {
+  try {
+    await sendReaction(sock, messageFrom, messageInfo, "⌛");
+    const videoResult = await ytSearch(query);
+    const video = videoResult.videos[0];
 
-  const videoText = `
+    const videoInfo = `
 ╭══════════════ ⍨
 │ 🧧 *YOUTUBE* 🧧
-│✾ 🏷️ Título: ${videoResult.videos[0].title}
-│✾ 🕒 Duração: ${videoResult.videos[0].timestamp}
-│✾ 📅 Postado: ${videoResult.videos[0].ago}
-│✾ 🎬 Canal: ${videoResult.videos[0].author.name}
+│ ➤ 🏷️ Título: *${video.title}*
+│ ➤ 🕒 Duração: *${video.timestamp}*
+│ ➤ 📅 Postado: *${video.ago}*
+│ ➤ 🎬 Canal: *${video.author.name}*
 ╰═════════════ ⍨
-`;
+  `;
 
-  const thumbnail = await getBuffer(videoResult.videos[0].thumbnail);
+    const thumbnail = await getBuffer(video.thumbnail);
 
-  sendImage(sock, messageFrom, quoted, thumbnail, videoText);
+    sendImage(sock, messageFrom, quoted, thumbnail, videoInfo);
 
-  const videoStream = ytDl(videoUrl, { filter: "audioandvideo" });
+    const videoUrl = video.url;
+    const videoStream = ytDl(videoUrl, { filter: "audioandvideo" });
 
-  videoStream.on("info", () => {
-    const tempFolderPath = "./src/temp/";
-    const videoWriteStream = fs.createWriteStream(`${tempFolderPath}video.mp4`);
-    videoStream.pipe(videoWriteStream);
+    videoStream.on("info", () => {
+      const tempFolderPath = "./src/temp/";
+      const videoPath = `${tempFolderPath}video.mp4`;
+      const audioPath = `${tempFolderPath}audio.mp3`;
 
-    videoWriteStream.on("finish", async () => {
-      if (command == "play_video") {
-        await sendVideo(sock, messageFrom, quoted, fs.readFileSync(`${tempFolderPath}video.mp4`));
-        fs.unlinkSync(`${tempFolderPath}video.mp4`);
-      } else if (command == "play_audio") {
-        exec(`ffmpeg -i ${tempFolderPath}video.mp4 ${tempFolderPath}audio.mp3`, async () => {
-          await sendAudio(sock, messageFrom, quoted, `${tempFolderPath}audio.mp3`);
-          fs.unlinkSync(`${tempFolderPath}video.mp4`)
-          fs.unlinkSync(`${tempFolderPath}audio.mp3`);
-        });
-      }
+      const videoWriteStream = fs.createWriteStream(videoPath);
+      videoStream.pipe(videoWriteStream);
+
+      videoWriteStream.on("finish", async () => {
+        if (command === "play_video") {
+          await sendVideo(sock, messageFrom, quoted, fs.readFileSync(videoPath));
+          fs.unlinkSync(videoPath);
+        } else if (command === "play_audio") {
+          await execAsync(`ffmpeg -i ${videoPath} ${audioPath}`);
+          await sendAudio(sock, messageFrom, quoted, audioPath);
+        
+          fs.unlinkSync(videoPath);
+          fs.unlinkSync(audioPath);
+        }
+      });
     });
-  });
+  } catch {
+    sendText(sock, messageFrom, quoted, "Não foi possível baixar seu vídeo.");
+  }
 }
 
 module.exports = ytDownload;

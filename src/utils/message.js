@@ -18,6 +18,10 @@ async function sendAudio(sock, to, quoted, audioUrl) {
   await sock.sendMessage(to, { audio: { url: audioUrl }, mimetype: "audio/mp4"}, { quoted })
 }
 
+async function sendReaction(sock, to, messageInfo, emoji) {
+  await sock.sendMessage(to, { react: { text: emoji, key: messageInfo.key }})
+}
+
 function getMessageText(messageInfo, messageType) {
   let textOfMessage = "";
 
@@ -40,5 +44,6 @@ module.exports = {
   sendVideo,
   sendSticker,
   sendAudio,
+  sendReaction,
   getMessageText,
 };
