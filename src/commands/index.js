@@ -51,7 +51,7 @@ async function processCommand(sock, messageInfo, messageType) {
 
   const mediaMessage = getMediaMessageContent(messageInfo, messageType);
 
-  //sock.sendPresenceUpdate("recording", messageFrom);
+  sock.sendPresenceUpdate("recording", messageFrom);
 
   if (isCmd) {
     console.log(`${clc.redBright(`[+] Comando no ${isGroup ? "Grupo " + groupName : "Privado"}`)}`);
@@ -125,18 +125,17 @@ async function processCommand(sock, messageInfo, messageType) {
         await ytDownload(sock, messageFrom, quoted, args.join(" "), messageInfo, command);
         break;
       
-      case "ig_down":
+      case "ig_dl":
         if (args.length == 0) {
           return await sendText(sock, messageFrom, quoted, "Eu não irei adivinhar o link que você quer baixar.");
         };
         await igDownload(sock, messageFrom, quoted, messageInfo, args.join(""));
         break;
 
-      case "tkk_down":
+      case "tkk_dl":
         if (args.length == 0) {
           return await sendText(sock, messageFrom, quoted, "Eu não irei adivinhar o vídeo que você quer baixar.");
         };
-
         await tkkDownload(sock, messageFrom, quoted, messageInfo, args.join(""));
         break;
       

@@ -39,7 +39,7 @@
   </thead>
   <tbody>
     <tr>
-      <td translate="no">Menu</td>
+      <td>Menu</td>
       <td>Opens a menu with a list of all bot commands.</td>
     </tr>
     <tr>
@@ -59,7 +59,7 @@
       <td>Information about your profile.</td>
     </tr>
     <tr>
-      <td>Sticker</td>
+      <td>Fig</td>
       <td>Creates a sticker from an image or video.</td>
     </tr>
     <tr>
@@ -79,8 +79,12 @@
       <td>Download video from YouTube.</td>
     </tr>
     <tr>
-      <td>Ig_down</td>
+      <td>Ig_dl</td>
       <td>Download video, story or image from instagram.</td>
+    </tr>
+    <tr>
+      <td>Tkk_dl</td>
+      <td>Download video from TikTok.</td>
     </tr>
   </tbody>
 </table>
