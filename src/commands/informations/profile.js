@@ -2,14 +2,6 @@ const fs = require("fs");
 const { sendImage } = require("../../utils/message");
 const { getBuffer } = require("../../utils/media");
 
-function getRandomPercentage() {
-  return Math.floor(Math.random() * 100);
-}
-
-function getRandomProgramValue() {
-  return Math.floor(Math.random() * (10000 - 50 + 1)) + 50;
-}
-
 async function getUserProfilePic(sock, sender) {
   try {
     const userProfilePicUrl = await sock.profilePictureUrl(sender, "image");
@@ -28,33 +20,29 @@ async function getUserBio(sock, sender) {
   }
 }
 
-
-async function profile(sock, from, sender, quoted, pushName, userDevice, senderIsAdm, isGroup) {
-  const userProfilePic = await getUserProfilePic(sock, sender);
-  const bio = await getUserBio(sock, sender);
-
-  const randomPutaPercentage = getRandomPercentage();
-  const randomGostosuraPercentage = getRandomPercentage();
-  const randomGadoPercentage = getRandomPercentage();
-  const randomProgramValue = getRandomProgramValue();
+async function profile(sock, messageFrom, sender, quoted, pushName, userDevice, senderIsAdm, isGroup) {
+  const [userProfilePic, userBio] = await Promise.all([
+    await getUserProfilePic(sock, sender),
+    await getUserBio(sock, sender),
+  ]);
 
   const text = `
 👤「 INFORMAÇÕES PERFIL 」👤
 
 🗣️ Usuário: *${pushName}*
 📱 Dispositivo: *${userDevice}*
-💭 Bio: *${bio}*
+💭 Bio: *${userBio}*
 🏦 Instituição: *Anny Bank*
-${isGroup? `⚙️ Administrador? ${senderIsAdm ? "*Sim ✅*" : "*Não ❌*"}\n` : ""}
+${isGroup ? `⚙️ Administrador? ${senderIsAdm ? "*Sim ✅*" : "*Não ❌*"}\n` : ""}
 ⭐「 % PORCENTAGEM % 」⭐
 
-😈 Nível de Puta: *${randomPutaPercentage}%*
-🌜 Nível de Gostosura: *${randomGostosuraPercentage}%*
-💋 Nível de Gado: *${randomGadoPercentage}%*
-👅 Valor do Programa: *R$${randomProgramValue}*
+😈 Nível de Puta: *${Math.floor(Math.random() * 100)}%*
+🌜 Nível de Gostosura: *${Math.floor(Math.random() * 100)}%*
+💋 Nível de Gado: *${Math.floor(Math.random() * 100)}%*
+👅 Valor do Programa: *R${Math.floor(Math.random() * (10000 - 50 + 1)) + 50}*
 `;
 
-  await sendImage(sock, from, quoted, userProfilePic, text);
+  await sendImage(sock, messageFrom, quoted, userProfilePic, text);
 }
 
 module.exports = profile;

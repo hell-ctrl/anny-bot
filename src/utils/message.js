@@ -23,19 +23,14 @@ async function sendReaction(sock, to, messageInfo, emoji) {
 }
 
 function getMessageText(messageInfo, messageType) {
-  let textOfMessage = "";
-
-  if (messageType === "conversation") {
-    textOfMessage = messageInfo.message.conversation;
-  } else if (messageType === "imageMessage") {
-    textOfMessage = messageInfo.message.imageMessage.caption;
-  } else if (messageType === "videoMessage") {
-    textOfMessage = messageInfo.message.videoMessage.caption;
-  } else if (messageType === "extendedTextMessage") {
-    textOfMessage = messageInfo.message.extendedTextMessage.text;
+  const messageTypes = {
+    conversation: messageInfo?.message?.conversation,
+    imageMessage: messageInfo?.message?.imageMessage?.caption,
+    videoMessage: messageInfo?.message?.videoMessage?.caption,
+    extendedTextMessage: messageInfo?.message?.extendedTextMessage?.text
   }
 
-  return textOfMessage;
+  return messageTypes[messageType] || "";
 }
 
 module.exports = {

@@ -22,9 +22,6 @@ function menu(pushName, isGroup, groupName, prefix) {
 ├══════════════ ⍨
 │ ✨ FIGURINHAS ✨
 │
-│ ➤ ${prefix}s
-│ ➤ ${prefix}stk
-│ ➤ ${prefix}sticker
 │ ➤ ${prefix}fig
 │ ➥ cria uma fig de uma imagem/video
 │ ➤ ${prefix}toimg

@@ -53,6 +53,7 @@ async function processCommand(sock, messageInfo, messageType) {
 
   sock.sendPresenceUpdate("recording", messageFrom);
 
+ 
   if (isCmd) {
     console.log(`${clc.redBright(`[+] Comando no ${isGroup ? "Grupo " + groupName : "Privado"}`)}`);
     console.log(`${clc.redBright("[+] Comando: ")}${command}`);
@@ -69,7 +70,7 @@ async function processCommand(sock, messageInfo, messageType) {
 
       case "criador":
         await sock.sendMessage(messageFrom, 
-          { contacts: { displayName: 'meu dono', contacts: [{ ownerContact }] } }
+          { contacts: { displayName: 'meu dono', contacts: [{ vcard: ownerContact }] } }
         )
         await sendText(sock, messageFrom, quoted, `Olá ${pushName} este é número do meu criador`);
         break
@@ -101,14 +102,14 @@ async function processCommand(sock, messageInfo, messageType) {
         if (!isQuotedSticker(messageType, messageInfo)) {
           return await sendText(sock, messageFrom, quoted, "Você precisa marcar uma figurinha.");
         };
-        await stkToMedia(mediaMessage, sock, messageFrom, quoted, messageType, messageInfo);
+        await stkToMedia(mediaMessage, sock, messageFrom, quoted);
         break;
 
       case "togif":
         if (!isQuotedSticker(messageType, messageInfo)) {
           return await sendText(sock, messageFrom, quoted, "Você precisa marcar uma figurinha.");
         };
-        await stkToMedia(mediaMessage, sock, messageFrom, quoted, messageType, messageInfo);
+        await stkToMedia(mediaMessage, sock, messageFrom, quoted);
         break;
 
       case "play_video":

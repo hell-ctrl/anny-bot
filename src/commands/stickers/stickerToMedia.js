@@ -1,16 +1,18 @@
-const { getFileBufferFromWhatsapp, getMediaMessageContent, getBuffer } = require("../../utils/media");
-const { sendImage, sendVideo } = require("../../utils/message");
+const { getFileBufferFromWhatsapp, getBuffer } = require("../../utils/media");
+const { sendImage, sendVideo, sendText } = require("../../utils/message");
 const webpToMp4 = require("../../utils/webpToMp4");
 const fs = require("fs");
 
-async function stkToMedia(sticker, sock, messageFrom, quoted, mediaType, messageInfo) {
+async function stkToMedia(sticker, sock, messageFrom, quoted) {
   try {
     const buffer = await getFileBufferFromWhatsapp(sticker, "sticker");
 
-    const isAnimated = getMediaMessageContent(messageInfo, mediaType).isAnimated;
+    const isAnimated = sticker.isAnimated;
+
+    const randomId = `${Math.random().toString(36).substring(2, 10)}`;
 
     const tempFolderPath = "./src/temp/";
-    const inputFile = `${tempFolderPath}media.webp`;
+    const inputFile = `${tempFolderPath}media_${randomId}.webp`;
 
     fs.writeFileSync(inputFile, buffer);
 
@@ -27,7 +29,7 @@ async function stkToMedia(sticker, sock, messageFrom, quoted, mediaType, message
       await sendImage(sock, messageFrom, quoted, buffer);
     }
 
-    fs.unlinkSync(`${tempFolderPath}media.webp`);
+    fs.unlinkSync(inputFile);
   } catch {
     sendText(sock, messageFrom, quoted,
       "Não foi possível concluir o comando, pois ocorreu um erro interno."

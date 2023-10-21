@@ -30,9 +30,10 @@ async function ytDownload(sock, messageFrom, quoted, query, messageInfo, command
     const videoStream = ytDl(videoUrl, { filter: "audioandvideo" });
 
     videoStream.on("info", () => {
+      const randomId = `${Math.random().toString(36).substring(2, 10)}`;
       const tempFolderPath = "./src/temp/";
-      const videoPath = `${tempFolderPath}video.mp4`;
-      const audioPath = `${tempFolderPath}audio.mp3`;
+      const videoPath = `${tempFolderPath}video_${randomId}.mp4`;
+      const audioPath = `${tempFolderPath}audio_${randomId}.mp3`;
 
       const videoWriteStream = fs.createWriteStream(videoPath);
       videoStream.pipe(videoWriteStream);
