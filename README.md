@@ -86,6 +86,10 @@
       <td>Tkk_dl</td>
       <td>Download video from TikTok.</td>
     </tr>
+    <tr>
+      <td>Editar_arquivo</td>
+      <td>Edite qualquer arquivo do bot (apenas o dono pode usar).</td>
+    </tr>
   </tbody>
 </table>
 
@@ -110,6 +114,15 @@
 > npm install
 ```
 
+<p>to put your number as owner of the bot, change the name of the bot and its number, edit this file <a href="info.json">info.json</a></p>
+
+``` json
+{
+  "botNumber": "5598875512460", // your bot number
+  "botName": "Anny Bot", // your bot name
+  "botOwner": "559887583208" // your number
+}
+```
 
 <p>If everything goes well, a QR code will appear in the terminal. Open WhatsApp on the device where you want to install the bot, go to "Connected devices," and select "Add a new device." Then, scan the QR code to complete the setup.</p>
 

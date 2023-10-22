@@ -20,6 +20,12 @@ function menu(pushName, isGroup, groupName, prefix) {
 │ ➥ informaçoes do seu perfil
 │
 ├══════════════ ⍨
+│  🚀 DONO 🚀
+│
+│ ➤ ${prefix}editar_arquivo
+│ ➥ edita um arquivo do bot.
+│
+├══════════════ ⍨
 │ ✨ FIGURINHAS ✨
 │
 │ ➤ ${prefix}fig
@@ -32,9 +38,9 @@ function menu(pushName, isGroup, groupName, prefix) {
 ├══════════════ ⍨
 │ 🌐 DOWNLOADS 🌐 
 │
-│ ➤ ${prefix}play_video (nome)
+│ ➤ ${prefix}play_video (nome/url)
 │ ➥ baixa um vídeo do youtube.
-│ ➤ ${prefix}play_audio (nome)
+│ ➤ ${prefix}play_audio (nome/url)
 │ ➥ baixa um áudio do youtube.
 │ ➤ ${prefix}ig_dl (url)
 │ ➥ baixa vídeo do instagram.

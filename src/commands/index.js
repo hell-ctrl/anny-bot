@@ -1,22 +1,26 @@
-const menu = require("./menu.js");
-const ownerContact = require("../configs/ownerContact.js");
-const info = require("../configs/info.json");
+const {
+  menu,
+  ownerContact,
+  info,
+  makeSticker,
+  stkToMedia,
+  profile,
+  infoBot,
+  sendSugestionToBotOwner,
+  editBotFiles,
+  ytDownload,
+  igDownload,
+  tkkDownload,
+  sendText,
+  getMessageText,
+  sendVideo,
+  isQuotedImage,
+  isQuotedVideo,
+  isQuotedSticker,
+  getMediaMessageContent,
+  selectQuote,
+} = require('./filesImportsForIndex.js');
 
-const makeSticker = require("./stickers/createSticker.js");
-const stkToMedia = require("./stickers/stickerToMedia.js");
-
-const profile = require("./informations/profile.js");
-const infoBot = require("./informations/infoBot.js");
-const sendSugestionToBotOwner = require("./informations/sugestions.js");
-
-const ytDownload = require("./downloads/ytDownload.js");
-const igDownload = require("./downloads/igDownload.js");
-const tkkDownload = require("./downloads/tkkDownload.js");
-
-const { sendText, getMessageText, sendVideo } = require("../utils/message.js");
-const { isQuotedImage, isQuotedVideo, isQuotedSticker, getMediaMessageContent } = require("../utils/media.js");
-
-const selectQuote = require("../configs/personalizedQuotes.js");
   
 const clc = require("cli-color");
 const fs = require("fs");
@@ -33,6 +37,7 @@ async function processCommand(sock, messageInfo, messageType) {
   const isCmd = prefixs.includes(textOfMessage[0]) && textOfMessage.length > 1 ? prefix = textOfMessage[0] : false;
   const command = isCmd? textOfMessage.slice(1).split(/ +/).shift().toLowerCase() : null;
   const pushName = messageInfo?.pushName || "";
+  const botOwner = info.botOwner;
 
   const isGroup = messageFrom.endsWith("@g.us");
   const groupMetadata = isGroup ? await sock.groupMetadata(messageFrom) : "";
@@ -42,6 +47,7 @@ async function processCommand(sock, messageInfo, messageType) {
   const sender = isGroup ? messageInfo.key.participant : messageFrom;
   const senderIsAdm = isGroup && groupAdmins.includes(sender);
   const botIsAdm = isGroup && groupAdmins.includes(`${info.botNumber}@s.whatsapp.net`);
+  const senderIsBotOwner = sender.split("@")[0] == botOwner;
 
   const quoted = messageInfo.quoted ? messageInfo.quoted : messageInfo;
   const userDevice = messageInfo.key.id.length > 21 ? 'Android' : messageInfo.key.id.substring(0, 2) == '3A' ? 'IOS' : 'WhatsApp web';
@@ -72,6 +78,7 @@ async function processCommand(sock, messageInfo, messageType) {
         await sock.sendMessage(messageFrom, 
           { contacts: { displayName: 'meu dono', contacts: [{ vcard: ownerContact }] } }
         )
+
         await sendText(sock, messageFrom, quoted, `Olá ${pushName} este é número do meu criador`);
         break
 
@@ -80,13 +87,27 @@ async function processCommand(sock, messageInfo, messageType) {
         break;
 
       case "sugestao":
-        if (args.length == 0) return await sendText(sock, messageFrom, quoted, "Você precisa escrever uma sugestão!");
+        if (args.length == 0) {
+          return await sendText(sock, messageFrom, quoted, "Você precisa escrever uma sugestão!");
+        }
+
         await sendText(sock, messageFrom, quoted, `Olá ${pushName}, sua sugestão foi enviada para o meu criador.`);
         await sendSugestionToBotOwner(sock, pushName, personalizedQuote.status_selo, sender, args.join(" "));
         break;
 
       case "perfil":
         await profile(sock, messageFrom, sender, quoted, pushName, userDevice, senderIsAdm, isGroup);
+        break;
+
+      case "editar_arquivo":
+        if (!senderIsBotOwner) {
+          return await sendText(sock, messageFrom, quoted, "Somente meu dono pode usar esse comando.");
+        }
+        if (args.length == 0) {
+          return await sendText(sock, messageFrom, quoted, "Use o comando assim: \neditar_arquivo caminho|novo conteudo");
+        };
+
+        await editBotFiles(sock, messageFrom, quoted, args.join(" "))
         break;
 
       case "fig":
