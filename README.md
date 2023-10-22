@@ -114,7 +114,7 @@
 > npm install
 ```
 
-<p>to put your number as owner of the bot, change the name of the bot and its number, edit this file <a href="info.json">info.json</a></p>
+<p>to put your number as owner of the bot, change the name of the bot and its number, edit this file <a href="src/configs/info.json">info.json</a></p>
 
 ``` json
 {
