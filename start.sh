@@ -3,7 +3,9 @@
 auth_path="./src/connection/auth"
 
 if command -v termux-info &> /dev/null; then
-    pkg install jq -y
+    if ! command -v jq &> /dev/null; then
+        pkg install jq -y
+    fi
 fi
 
 if [ "$(ls -A "$auth_path" | wc -l)" -le 1 ]; then
