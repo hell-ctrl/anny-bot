@@ -1,2 +1,3 @@
 node_modules
 src/connection/auth/*
+src/connection/connectionInfo.json

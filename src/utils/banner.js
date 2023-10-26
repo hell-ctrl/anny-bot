@@ -1,8 +1,9 @@
 const cfonts = require("cfonts");
 const _ = require("lodash");
+const { botName } = require("../configs/info.json");
 
 
-const banner = cfonts.render("Anny", {
+const banner = cfonts.render(botName, {
   font: "tiny",
   align: "center",
   colors: _.shuffle(["red", "cyan", "yellow", "green"]),
@@ -18,4 +19,4 @@ const banner = cfonts.render("Anny", {
 });
 
 
-module.exports = { banner };
+module.exports = banner;

@@ -12,6 +12,10 @@
   </a>
 </p>
 
+<h2>Now you can choose how you want to connect WhatsApp to the Bot. 😃</h2>
+<p>Choose between connecting by qrcode or number</p>
+<img src="assets/preview.gif"></img>
+
 <h2>Technologies Used 🤔</h2>
 
 <p align="center">
@@ -111,7 +115,8 @@
 > git clone https://github.com/hell-ctrl/anny-bot/
 > cd anny-bot
 > npm i
-> npm install
+> chmod 777 ./start.sh
+> npm start
 ```
 
 <p>to put your number as owner of the bot, change the name of the bot and its number, edit this file <a href="src/configs/info.json">info.json</a></p>

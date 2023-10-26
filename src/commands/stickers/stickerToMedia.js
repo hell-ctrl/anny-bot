@@ -1,6 +1,6 @@
 const { getFileBufferFromWhatsapp, getBuffer } = require("../../utils/media");
 const { sendImage, sendVideo, sendText } = require("../../utils/message");
-const webpToMp4 = require("../../utils/webpToMp4");
+const webpToMp4 = require("./webpToMp4");
 const fs = require("fs");
 
 async function stkToMedia(sticker, sock, messageFrom, quoted) {
