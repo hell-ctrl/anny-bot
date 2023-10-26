@@ -12,10 +12,6 @@
   </a>
 </p>
 
-<h2>Now you can choose how you want to connect WhatsApp to the Bot. 😃</h2>
-<p>Choose between connecting by qrcode or number</p>
-<img src="assets/preview.gif"></img>
-
 <h2>Technologies Used 🤔</h2>
 
 <p align="center">
@@ -27,6 +23,9 @@
   </a>
 </p>
 
+<h2>Now you can choose how you want to connect WhatsApp to the Bot. 😃</h2>
+<p>Choose between connecting by qrcode or number</p>
+<img src="assets/preview.gif"></img>
 
 <h2>Bot Commands ✅</h2>
 
