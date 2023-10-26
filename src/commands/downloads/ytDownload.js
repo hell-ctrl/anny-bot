@@ -65,7 +65,7 @@ async function downloadAndSendVideo(sock, messageFrom, quoted, url, command) {
         await sendVideo(sock, messageFrom, quoted, fs.readFileSync(videoPath));
         fs.unlinkSync(videoPath);
       } else if (command === "play_audio") {
-        await execAsync(`ffmpeg -i ${videoPath} ${audioPath}`);
+        await execAsync(`ffmpeg -i ${videoPath} -b:a 192K -vn ${audioPath}`);
         await sendAudio(sock, messageFrom, quoted, audioPath);
 
         fs.unlinkSync(videoPath);

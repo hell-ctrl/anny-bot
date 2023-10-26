@@ -15,7 +15,7 @@ async function sendSticker(sock, to, quoted, sticker) {
 }
 
 async function sendAudio(sock, to, quoted, audioUrl) {
-  await sock.sendMessage(to, { audio: { url: audioUrl }, mimetype: "audio/mp4"}, { quoted })
+  await sock.sendMessage(to, { audio: { url: audioUrl }, mimetype: "audio/mp4" }, { quoted })
 }
 
 async function sendReaction(sock, to, messageInfo, emoji) {
