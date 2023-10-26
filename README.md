@@ -1,7 +1,7 @@
 <img align="center" src="https://user-images.githubusercontent.com/74038190/225813708-98b745f2-7d22-48cf-9150-083f1b00d6c9.gif"></img>
 <h1 align="center">Anny Bot</h1>
 
-<p>Anny Bot is the result of hard work and passion, made by me, with the collaboration of dedicated friends. It was developed with a simple and powerful goal in mind: to make people's lives on WhatsApp easier and more fun!</p>
+<p>Anny Bot foi pensado para ser um projeto open-source, isso significa que qualquer pessoa pudesse ter acesso ao código. Aí está, espero que gostem desse Bot quem fiz com tanto carinho :).</p>
 
 <p align="center">
   <a href="https://github.com/hell-ctrl">
@@ -12,7 +12,7 @@
   </a>
 </p>
 
-<h2>Technologies Used 🤔</h2>
+<h2>Tecnologias Ultilizadas 🤔</h2>
 
 <p align="center">
   <a href="https://www.javascript.com">
@@ -23,71 +23,72 @@
   </a>
 </p>
 
-<h2>Now you can choose how you want to connect WhatsApp to the Bot. 😃</h2>
-<p>Choose between connecting by qrcode or number</p>
-<img src="assets/preview.gif"></img>
+<h2>Agora você pode conectar o bot no WhatsApp por número ou por qrcode. 😃</h2>
+<p>Escolha entre número ou qrcode.</p>
+<div align="center"><img src="assets/preview.gif"></img></div>
 
-<h2>Bot Commands ✅</h2>
 
-<p><strong>Note:</strong> To use the commands, you need to prefix them with the prefix ("/", ".", "!").</p>
+<h2>Comandos da Anny ✅</h2>
 
-<p><strong>Example:</strong> /menu</p>
+<p><strong>Aviso:</strong> Para usar os comandos, você precisa usar algúm dos prefixos antes dos comandos ("/", ".", "!").</p>
+
+<p><strong>Exemplo:</strong> /menu</p>
 
 <table>
   <thead>
     <tr>
-      <th>Command</th>
-      <th>Description</th>
+      <th>Comando</th>
+      <th>Descrição</th>
     </tr>
   </thead>
   <tbody>
     <tr>
       <td>Menu</td>
-      <td>Opens a menu with a list of all bot commands.</td>
+      <td>Abre o menu que lista todos os comandos.</td>
     </tr>
     <tr>
       <td>Criador</td>
-      <td>Bot creator contact.</td>
+      <td>Contato do criador do bot.</td>
     </tr>
     <tr>
       <td>Sugestao</td>
-      <td>Send a suggestion to bot creator.</td>
+      <td>Envie uma sugestão para o criador do bot.</td>
     </tr>
     <tr>
       <td>Infobot</td>
-      <td>Information about the bot.</td>
+      <td>Informações sobre o bot.</td>
     </tr>
     <tr>
       <td>Perfil</td>
-      <td>Information about your profile.</td>
+      <td>Informações sobre seu perfil.</td>
     </tr>
     <tr>
       <td>Fig</td>
-      <td>Creates a sticker from an image or video.</td>
+      <td>Crie uma figurinha a partir de uma img ou vídeo..</td>
     </tr>
     <tr>
       <td>Toimg</td>
-      <td>Converts a sticker to an image.</td>
+      <td>Converte uma figurinha para imagem.</td>
     </tr>
     <tr>
       <td>Togif</td>
-      <td>Converts an animated sticker to a gif.</td>
+      <td>Converte uma figurinha para gif.</td>
     </tr>
     <tr>
       <td>Play_audio</td>
-      <td>Download audio from YouTube.</td>
+      <td>om Download áudio do YouTube.</td>
     </tr>
     <tr>
       <td>Play_video</td>
-      <td>Download video from YouTube.</td>
+      <td>Download vídeo do YouTube.</td>
     </tr>
     <tr>
       <td>Ig_dl</td>
-      <td>Download video, story or image from instagram.</td>
+      <td>Download vídeo, story ou imagem do Instagram.</td>
     </tr>
     <tr>
       <td>Tkk_dl</td>
-      <td>Download video from TikTok.</td>
+      <td>Download video do TikTok.</td>
     </tr>
     <tr>
       <td>Editar_arquivo</td>
@@ -97,7 +98,7 @@
 </table>
 
 
-<h2>Installation ⚙️</h2>
+<h2>Instalação ⚙️</h2>
 
 <p>Before you begin the installation, make sure you have the following prerequisites:</p>
 
