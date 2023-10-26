@@ -100,7 +100,7 @@
 
 <h2>Instalação ⚙️</h2>
 
-<p>Before you begin the installation, make sure you have the following prerequisites:</p>
+<p>Antes de comecar a instalação, certifique-se de ter os seguintes pré-requisitos:</p>
 
 <ul>
   <li>Git</li>
@@ -109,31 +109,28 @@
   <li>FFmpeg</li>
 </ul>
 
-<p>Follow these installation commands:</p>
+<p>Siga os comandos de instalação abaixo:</p>
 
 ``` bash
 > git clone https://github.com/hell-ctrl/anny-bot/
 > cd anny-bot
 > npm i
-> chmod 777 ./start.sh
+> chmod 777 start.sh
 > npm start
 ```
 
-<p>to put your number as owner of the bot, change the name of the bot and its number, edit this file <a href="src/configs/info.json">info.json</a></p>
+<p>Para mudar o número do dono, do bot, e o nome dele, abra o aquivo <a href="src/configs/info.json">info.json</a></p>
 
 ``` json
 {
-  "botNumber": "5598875512460", // your bot number
-  "botName": "Anny Bot", // your bot name
-  "botOwner": "559887583208" // your number
+  "botNumber": "5598875512460", // seu número do bot
+  "botName": "Anny Bot", // nome do seu bot
+  "botOwner": "559887583208" // número do dono do bot
 }
 ```
+<p><strong>Aviso:</strong> Se os comandos não funcionarem de primeira, espere um pouco e depois reinicie o bot.</p>
 
-<p>If everything goes well, a QR code will appear in the terminal. Open WhatsApp on the device where you want to install the bot, go to "Connected devices," and select "Add a new device." Then, scan the QR code to complete the setup.</p>
-
-<p><strong>Note:</strong> If the commands don't work initially, try restarting the bot.</p>
-
-<h2>Tested On 💻</h2>
+<h2>Testado em 💻</h2>
 
 <ul>
   <li>Termux</li>
