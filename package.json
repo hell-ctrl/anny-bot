@@ -20,6 +20,7 @@
     "cfonts": "^3.2.0",
     "cheerio": "^1.0.0-rc.12",
     "cli-color": "^2.0.3",
+    "dateformat": "^2.2.0",
     "inquirer": "^8.0.0",
     "lodash": "^4.17.21",
     "node-fetch": "^2.7.0",
