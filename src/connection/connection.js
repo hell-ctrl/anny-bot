@@ -50,6 +50,7 @@ async function connectToWhatsApp() {
   });
 
   sock.ev.on("creds.update", saveCreds);
+  rl.close()
   return sock;
 }
 
