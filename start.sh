@@ -8,6 +8,8 @@ if command -v termux-info &> /dev/null; then
     fi
 fi
 
+clear
+
 if [ "$(ls -A "$auth_path" | wc -l)" -le 1 ]; then
     node src/utils/selectConnectionMethod.js
     usePairingCode=$(jq -r '.usePairingCode' ./src/connection/connectionInfo.json)
