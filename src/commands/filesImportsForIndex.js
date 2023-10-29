@@ -19,4 +19,5 @@ module.exports = {
   isQuotedSticker: require("../utils/media.js").isQuotedSticker,
   getMediaMessageContent: require("../utils/media.js").getMediaMessageContent,
   selectQuote: require("../configs/personalizedQuotes.js"),
+  printLogs: require("../utils/commands.js").printLogs()
 };
