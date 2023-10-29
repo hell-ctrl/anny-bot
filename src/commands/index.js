@@ -19,10 +19,9 @@ const {
   isQuotedSticker,
   getMediaMessageContent,
   selectQuote,
+  printLogs
 } = require('./filesImportsForIndex.js');
 
-  
-const clc = require("cli-color");
 const fs = require("fs");
 const _ = require("lodash");
 
@@ -61,10 +60,7 @@ async function processCommand(sock, messageInfo, messageType) {
 
  
   if (isCmd) {
-    console.log(`${clc.redBright(`[+] Comando no ${isGroup ? "Grupo " + groupName : "Privado"}`)}`);
-    console.log(`${clc.redBright("[+] Comando: ")}${command}`);
-    console.log(`${clc.redBright("[+] Usuário: ")}${pushName}`);
-    console.log(`${clc.redBright("[+] Data: ")}${new Date()} \n`);
+    printLogs(isGroup, sender, pushName, groupName, command);
 
     switch (command) {
 
