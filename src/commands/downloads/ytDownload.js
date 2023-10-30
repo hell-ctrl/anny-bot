@@ -29,7 +29,7 @@ async function ytDownload(sock, messageFrom, quoted, query, messageInfo, command
     
     const thumbnail = await getBuffer(video.thumbnail);
 
-    await sendImage(sock, messageFrom, quoted, thumbnail, videoInfo);
+    sendImage(sock, messageFrom, quoted, thumbnail, videoInfo);
 
     const videoUrl = video.url;
     const videoStream = ytDl(videoUrl, { filter: "audioandvideo" });
