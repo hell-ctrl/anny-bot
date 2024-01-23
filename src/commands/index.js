@@ -136,7 +136,7 @@ async function processCommand(sock, messageInfo, messageType) {
         await ytDownload(sock, messageFrom, quoted, args.join(" "), messageInfo, command);
         break;
 
-      case "play_audio":
+      case "mp3":
         if (args.length == 0) {
           return await sendText(sock, messageFrom, quoted, "Eu não irei adivinhar o nome do áudio que você quer baixar.");
         };
