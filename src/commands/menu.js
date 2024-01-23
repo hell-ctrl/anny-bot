@@ -38,13 +38,13 @@ function menu(pushName, isGroup, groupName, prefix) {
 ├══════════════ ⍨
 │ 🌐 DOWNLOADS 🌐 
 │
-│ ➤ ${prefix}play_video (nome)
+│ ➤ ${prefix}mp4 (nome)
 │ ➥ baixa um vídeo do youtube.
-│ ➤ ${prefix}play_audio (nome)
+│ ➤ ${prefix}mp3 (nome)
 │ ➥ baixa um áudio do youtube.
-│ ➤ ${prefix}ig_dl (url)
+│ ➤ ${prefix}ig (url)
 │ ➥ baixa vídeo do instagram.
-│ ➤ ${prefix}tkk_dl (url)
+│ ➤ ${prefix}tiktok (url)
 │ ➥ baixa vídeo do tico teco.
 │
 ╰══════════════ ⍨
